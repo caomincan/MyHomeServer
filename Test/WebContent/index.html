@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>MyHome Server </title>
+</head>
+<body onload="setpic()">
+      <form>
+  	       <input type="button" onclick="getnum()" value="Generate Random Number">
+  	   </form>
+  	   <h1 id="Text1"> </h1>
+  	   <h2 id="Text2"> </h2>
+  	    <img id="head" src="" width="50px" height="50px"> 
+  	    
+  	    <script langruage="javascript" type="text/javascript">
+  	     function setpic(){
+
+  	     	 var sourc ="webwxgeticon.jpg";
+  	     	 document.getElementById("head").src= sourc;
+  	     	}
+  	   	      function getnum(){
+  	   	       if(getnum.number == undefined){
+                  getnum.number = 0;
+            } else{
+                getnum.number++; 
+            }
+  	   	     document.getElementById("Text1").innerHTML=getnum.number;
+             document.getElementById("Text2").innerHTML=url("/obj");
+  	   	  }
+  	   	  
+  	   </script>
+  	   <noscript>
+  	   	   Sorry..JavaScript is needed to go ahead.
+  	   </noscript>
+</body>
+</html>
