@@ -13,7 +13,7 @@ import java.sql.*;
 public class hello extends HttpServlet {
 	private static final String dbURL="jdbc:mysql://localhost:3306/cansql";
 	private static final String usr="student";
-	private static final String psw="student";
+	private static final String psw="";
 	
 	private static Random rnd;
     private Integer[] var;
