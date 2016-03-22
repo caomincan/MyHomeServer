@@ -10,8 +10,6 @@
 USE CLAD;
 
 DROP TABLE IF EXISTS `questionset`;
-
----------------------------------------------------------
 --
 -- Table structure for table 'questionset'
 --
