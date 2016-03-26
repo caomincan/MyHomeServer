@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/getQ")
 public class getQ extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+    private static final String USRANS ="                                        ";
     private Qset myquestion;
     /**
      * @see HttpServlet#HttpServlet()
@@ -43,33 +43,35 @@ public class getQ extends HttpServlet {
 		Integer x=0;
 		// determine button type
 		String cmd=  request.getParameter("bnType");
-		try{
-		switch(cmd){
-		case "Start":  // System.out.println("Start\n");
-		                id = "1";
-		                break;
-		case "Next":   // System.out.println("Next\n");
-		                id = request.getParameter("NUM");
-		                x = Integer.valueOf(id);
-		                x++;
-		                if(x<=0) x=1;
-		                if(x> myquestion.getSize()) x=myquestion.getSize();
-		                id = x.toString();
-		                break;
-		case "Previous"://System.out.println("Previous\n");
-		                id = request.getParameter("NUM");
-                        x = Integer.valueOf(id);
-                        x--;
-                        if(x<=0) x=1;
-		                if(x> myquestion.getSize()) x=myquestion.getSize();
-                        id = x.toString();
-                        break;
-        default:       System.out.println(cmd+"\n");
+		char ans[];
+		if(cmd.equals("Start")) {
+			id ="1";
+			ans = USRANS.toCharArray();
+			request.getSession().setAttribute("ans",USRANS);
+			request.getSession().setAttribute("right", myquestion.getAnswer());
+		} else{
+		    id = request.getParameter("NUM");
+            x = Integer.valueOf(id);
+            ans = ((String)request.getSession().getAttribute("ans")).toCharArray();
+            if(request.getParameter("Usrans")!=null) {
+			String tmp=(String) request.getParameter("Usrans");	
+			// save current value
+		    ans[x-1]=tmp.charAt(0);
+            }
+		    // get next question content
+		    if(cmd.equals("Next")){
+		    	if(x<myquestion.getSize()) x++;
+		    } else if (cmd.equals("Previous")) {
+		    	if(x>1) x--;
+		    }
+		    id = x.toString();
 		}
-		
-		}
-		catch(Exception e){
-			System.out.println("Didn't get command value\n");
+		// store answer
+		request.getSession().setAttribute("ans", String.valueOf(ans));
+		if(cmd.equals("Submit")) {
+			System.out.println("Submit");
+			request.getRequestDispatcher("result.jsp").forward(request, response);
+			return;
 		}
 		request.setAttribute("question", myquestion.getQuestion(id));
 		request.setAttribute("A", myquestion.getA(id));
@@ -77,6 +79,7 @@ public class getQ extends HttpServlet {
 		request.setAttribute("C", myquestion.getC(id));
 		request.setAttribute("D", myquestion.getD(id));
 		request.setAttribute("id", id);
+		request.setAttribute("size", String.valueOf(myquestion.getSize()));
 		request.getRequestDispatcher("Practice.jsp").forward(request, response);
 	}
 

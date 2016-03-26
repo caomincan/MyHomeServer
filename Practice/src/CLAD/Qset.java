@@ -4,6 +4,7 @@ public class Qset {
     private static final String DEFAULT_DBURL="jdbc:mysql://localhost/CLAD";
     private static final String DEFAULT_USR="labview";
     private static final String DEFAULT_PSD="labview";
+    private static final Integer DEFAULT_SIZE=40;
     
     private String user;          // user name
     private String password;     // password
@@ -70,6 +71,21 @@ public class Qset {
 		}
 	}
 	public Integer getSize() { return size;}
+    public String getAnswer(){
+    	String result;
+    	if(ready){
+    		result ="";
+    		for(int i=0;i<size;i++){
+    			result += questionSet[i][field.answer.ordinal()];
+    		}
+    	} else{
+    		result=" ";
+    		for(int i=1;i<DEFAULT_SIZE;i++){
+        		result += " ";
+        	}
+    	}
+    	return result;
+    }
 	public String getQuestion(String id){
 		if(!ready) return "";
 		// restrict range
@@ -90,7 +106,7 @@ public class Qset {
 		if(num>=size) num=size-1;
 		String result = "";
 		if(questionSet[num][field.A.ordinal()] != null) result += questionSet[num][field.A.ordinal()];
-		if(questionSet[num][field.Apic.ordinal()] != null) result += "<img src=\"src/"+questionSet[num][field.Apic.ordinal()]+"\">";
+		if(questionSet[num][field.Apic.ordinal()] != null) result += "<br><img src=\"src/"+questionSet[num][field.Apic.ordinal()]+"\">";
 		return result;
 	}
 	public String getB(String id){
@@ -101,7 +117,7 @@ public class Qset {
 		if(num>=size) num=size-1;
 		String result = "";
 		if(questionSet[num][field.B.ordinal()] != null) result += questionSet[num][field.B.ordinal()];
-		if(questionSet[num][field.Bpic.ordinal()] != null) result += "<img src=\"src/"+questionSet[num][field.Bpic.ordinal()]+"\">";
+		if(questionSet[num][field.Bpic.ordinal()] != null) result +="<br><img src=\"src/"+questionSet[num][field.Bpic.ordinal()]+"\">";
 		return result;
 	}
 	public String getC(String id){
@@ -112,7 +128,7 @@ public class Qset {
 		if(num>=size) num=size-1;
 		String result = "";
 		if(questionSet[num][field.C.ordinal()] != null) result += questionSet[num][field.C.ordinal()];
-		if(questionSet[num][field.Cpic.ordinal()] != null) result += "<img src=\"src/"+questionSet[num][field.Cpic.ordinal()]+"\">";
+		if(questionSet[num][field.Cpic.ordinal()] != null) result += "<br><img src=\"src/"+questionSet[num][field.Cpic.ordinal()]+"\">";
 		return result;
 	}
 	public String getD(String id){
@@ -123,7 +139,7 @@ public class Qset {
 		if(num>=size) num=size-1;
 		String result = "";
 		if(questionSet[num][field.D.ordinal()] != null) result += questionSet[num][field.D.ordinal()];
-		if(questionSet[num][field.Dpic.ordinal()] != null) result += "<img src=\"src/"+questionSet[num][field.Dpic.ordinal()]+"\">";
+		if(questionSet[num][field.Dpic.ordinal()] != null) result += "<br><img src=\"src/"+questionSet[num][field.Dpic.ordinal()]+"\">";
 		return result;
 	}
 }
