@@ -10,6 +10,8 @@
 USE CLAD;
 
 DROP TABLE IF EXISTS `questionset`;
+
+---------------------------------------------------------
 --
 -- Table structure for table 'questionset'
 --
@@ -310,4 +312,39 @@ null,'37D.png',
      'B','Strict property nodes require precise knowledge of the numeric representation. Since the question asks for the means to change the text color of any control, a strict Property Node does not suffice. An implicit Property Node (C), can only be used locally. Answer D shows a property that is not even relevant to the question. Thus, option B is the best answer.')
 
 ;
+DROP TABLE IF EXISTS `userprofile`;
+DROP TABLE IF EXISTS `users`;
+
+create table if not exists `users` 
+     ( ID int not null AUTO_INCREMENT,
+	   usrname varchar(10) not null unique,
+	   usrpsd  varchar(10) not null,
+       primary key (ID)
+       );
+       
+insert into `users` values
+     (1,'mincan','abc1234'),
+     (2,'xiaolang','asdfghjkl');
+
+
+
+create table if not exists `userprofile`
+      ( ID int not null,
+        lastname varchar(255) not null,
+        firstname varchar(255) not null,
+        tel     varchar(10),
+        primary key(ID),
+        foreign key(ID) references users(ID)
+        );
+        
+insert into userprofile values 
+     (1,'Mincan','Cao','5453791234'),
+     (2,'Xiaolang','Li','1234567890');
+     
+drop user if exists 'usradmin'@'localhost';
+create user if not exists 'usradmin'@'localhost';
+set password for 'usradmin'@'localhost'='admin';
+grant select,insert,create view, grant option on CLAD.users to usradmin@localhost;
+grant select,insert,create view, grant option on CLAD.userprofile to usradmin@localhost;
+
 

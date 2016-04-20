@@ -86,6 +86,14 @@ public class Qset {
     	}
     	return result;
     }
+    public String getExplain(String id){
+		if(!ready) return "";
+		// restrict range
+		Integer num = Integer.valueOf(id)-1;
+		if(num<0) num=0;
+		if(num>=size) num=size-1;
+		return questionSet[num][field.explain.ordinal()];
+    }
 	public String getQuestion(String id){
 		if(!ready) return "";
 		// restrict range

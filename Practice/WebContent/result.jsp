@@ -31,10 +31,10 @@
         	        		"<img src=\"src/right.png\" width=\"50px\" height=\"50px\">":
         	        		"<img src=\"src/wrong.png\" width=\"50px\" height=\"50px\">"%>                        
         	        </td>
-        	        <td>   <form action="getQ">
+        	        <td>   <form action="getQ" method="post">
         	               <input type="hidden" name="NUM" value=<%=String.valueOf(i+1)%>>
-        	               <input type="button" value="Explain" onclick="document.getElementById('bnTyp').value=this.value:this.form.submit()">
-        	               <input type="hidden" name="bnTyp"  id="bnTyp"  value="bnTyp">
+        	               <input type="submit" value="Explain">
+        	               <input type="hidden" name="bnType" value="Explain">
         	               </form>
         	        </td>
         	        <% if(result.charAt(i)==correctAns.charAt(i)) point++;%>

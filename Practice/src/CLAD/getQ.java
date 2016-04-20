@@ -80,6 +80,10 @@ public class getQ extends HttpServlet {
 		request.setAttribute("D", myquestion.getD(id));
 		request.setAttribute("id", id);
 		request.setAttribute("size", String.valueOf(myquestion.getSize()));
+		if(cmd.equals("Explain")) {
+			request.setAttribute("explain", myquestion.getExplain(id));
+			request.getRequestDispatcher("Explain.jsp").forward(request, response);
+		}
 		request.getRequestDispatcher("Practice.jsp").forward(request, response);
 	}
 
